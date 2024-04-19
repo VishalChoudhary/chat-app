@@ -8,6 +8,11 @@ const server = http.createServer(app);
 const io=new Server(server);
 
 //Socket.io
+io.on("connection",(socket)=>{
+    socket.on("user-message",(message)=>{
+        io.emit("message",message);
+    });
+});
 
 app.use(express.static(path.resolve("./public")));
 
